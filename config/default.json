@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://vmp351:2LWWfsGoUE0JRX2u@vodafonecluster.zpef6k1.mongodb.net/",
+    "jwtSecret": "secret"
+}
