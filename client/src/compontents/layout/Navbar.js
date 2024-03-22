@@ -1,66 +1,95 @@
-import React from "react";
+import React, { Fragment, useContext } from "react";
 import PropTypes from "prop-types";
 import { Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { byPrefixAndName } from "@awesome.me/kit-KIT_CODE/icons";
+import { faVideo, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
 
-const AppNavbar = ({ title, icon }) => {
+const AppNavbar = ({ title }) => {
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated, logout, user } = authContext;
+
+  const onLogout = () => {
+    logout();
+  };
+
+  const authLinks = (
+    <>
+      {/* <li className="nav-item">
+        <div className="nav-link">Hello {user && user.name}</div>{" "}
+      </li>
+      <li className="nav-item">
+        <a
+          className="nav-link"
+          onClick={onLogout}
+        >
+          <FontAwesomeIcon icon={faSignOut} /> Logout
+        </a>
+      </li> */}
+    </>
+  );
+
+  const guestLinks = (
+    <>
+      {/* <li className="nav-item">
+        <Link
+          to="/register"
+          className="nav-link"
+        >
+          Register
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link
+          to="/login"
+          className="nav-link"
+        >
+          Login
+        </Link>
+      </li> */}
+    </>
+  );
+
   return (
-    <Navbar className="navbar-expand-lg navbar-light bg-light">
-      <a
-        className="navbar-brand px-4"
-        href="/"
-      >
-        <FontAwesomeIcon icon={byPrefixAndName.fas["fa-address-book"]} />{" "}
-        {title}
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
+    <Navbar
+      bg="light"
+      expand="md"
+      className="px-4"
+    >
+      <Navbar.Brand className="pe-4">
+        <Link
+          to="/"
+          className="nav-link"
+        >
+          <FontAwesomeIcon icon={faVideo} /> {title}
+        </Link>
+      </Navbar.Brand>
 
-      <div
-        className="collapse navbar-collapse"
-        id="navbarSupportedContent"
-      >
-        <ul className="navbar-nav mr-auto">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <ul className="navbar-nav me-auto">
           <li className="nav-item">
-            <a
+            <Link
+              to="/about"
               className="nav-link"
-              href="/"
-            >
-              Home
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="nav-link"
-              href="/about"
             >
               About
-            </a>
+            </Link>
           </li>
+          {isAuthenticated ? authLinks : guestLinks}
         </ul>
-      </div>
+      </Navbar.Collapse>
     </Navbar>
   );
 };
 
 AppNavbar.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string
+  title: PropTypes.string.isRequired
 };
 
 AppNavbar.defaultProps = {
-  title: "Contact Keeper",
-  icon: "fas fa-id-card-alt"
+  title: "Movies App"
 };
 
 export default AppNavbar;
