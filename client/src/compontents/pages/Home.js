@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Row, Col } from "react-bootstrap";
 import Contacts from "../contacts/Contacts";
 import ContactForm from "../contacts/ContactForm";
 import ContactFilter from "../contacts/ContactFilter";
@@ -14,13 +15,15 @@ export const Home = () => {
 
   return (
     <div className="grid-2">
-      <div>
-        <ContactForm />
-      </div>
-      <div>
-        <ContactFilter />
-        <Contacts />
-      </div>
+      <Row>
+        <Col md={6}>
+          <ContactForm />
+        </Col>
+        <Col md={6}>
+          <ContactFilter />
+          <Contacts />
+        </Col>
+      </Row>
     </div>
   );
 };

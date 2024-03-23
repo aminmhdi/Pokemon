@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import ContactContext from "../../context/contact/contactContext";
-import { Button } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 
 const ContactForm = () => {
   const contactContext = useContext(ContactContext);
@@ -47,68 +47,100 @@ const ContactForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <h2 className="text-primary">{current ? "Edit" : "Add"}</h2>
-      <input
-        className="form-control"
-        type="text"
-        placeholder="Name"
-        name="name"
-        value={name}
-        onChange={onChange}
-      />
-      <input
-        className="form-control"
-        type="text"
-        placeholder="Email"
-        name="email"
-        value={email}
-        onChange={onChange}
-      />
-      <input
-        className="form-control"
-        type="text"
-        placeholder="Phone"
-        name="phone"
-        value={phone}
-        onChange={onChange}
-      />
-      <span>Type: </span>
-      <input
-        className="radio-input"
-        type="radio"
-        name="type"
-        value="personal"
-        checked={type === "personal"}
-        onChange={onChange}
-      />{" "}
-      Personal
-      <input
-        className="radio-input"
-        type="radio"
-        name="type"
-        value="professional"
-        checked={type === "professional"}
-        onChange={onChange}
-      />{" "}
-      Professional
-      <div className="d-grid gap-2">
-        <Button
-          type="submit"
-          className="btn btn-primary"
+      <Row>
+        <Col
+          lg={12}
+          className="mb-2"
         >
-          Save
-        </Button>
-        {current && (
-          <Button
-            type="button"
-            value="Save"
-            className="btn btn-block btn-light"
-            onClick={clearAll}
-          >
-            Clear
-          </Button>
-        )}
-      </div>
+          <h2 className="text-primary">{current ? "Edit" : "Add"}</h2>
+        </Col>
+        <Col
+          lg={12}
+          className="mb-2"
+        >
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Name"
+            name="name"
+            value={name}
+            onChange={onChange}
+          />
+        </Col>
+        <Col
+          lg={12}
+          className="mb-2"
+        >
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Email"
+            name="email"
+            value={email}
+            onChange={onChange}
+          />
+        </Col>
+        <Col
+          lg={12}
+          className="mb-2"
+        >
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Phone"
+            name="phone"
+            value={phone}
+            onChange={onChange}
+          />
+        </Col>
+        <Col
+          lg={12}
+          className="mb-2"
+        >
+          <span>Type: </span>{" "}
+          <input
+            className="radio-input"
+            type="radio"
+            name="type"
+            value="personal"
+            checked={type === "personal"}
+            onChange={onChange}
+          />{" "}
+          Personal{" "}
+          <input
+            className="radio-input"
+            type="radio"
+            name="type"
+            value="professional"
+            checked={type === "professional"}
+            onChange={onChange}
+          />{" "}
+          Professional
+        </Col>
+        <Col
+          lg={12}
+          className="mb-2"
+        >
+          <div className="d-grid gap-2">
+            <Button
+              type="submit"
+              className="btn btn-primary"
+            >
+              Save
+            </Button>
+            {current && (
+              <Button
+                type="button"
+                value="Save"
+                className="btn btn-block btn-light"
+                onClick={clearAll}
+              >
+                Clear
+              </Button>
+            )}
+          </div>
+        </Col>
+      </Row>
     </form>
   );
 };
