@@ -5,34 +5,40 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVideo, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+import ContactContext from "../../context/contact/contactContext";
 
 const AppNavbar = ({ title }) => {
   const authContext = useContext(AuthContext);
+  const contactContext = useContext(ContactContext);
+
   const { isAuthenticated, logout, user } = authContext;
+  const { clearContacts } = contactContext;
 
   const onLogout = () => {
     logout();
+    clearContacts();
   };
 
   const authLinks = (
-    <>
-      {/* <li className="nav-item">
-        <div className="nav-link">Hello {user && user.name}</div>{" "}
+    <Fragment>
+      <li className="nav-item">
+        <div className="nav-link">{user && user.name}</div>
       </li>
       <li className="nav-item">
         <a
-          className="nav-link"
+          className="nav-link cursor-pointer"
           onClick={onLogout}
+          href="#!"
         >
           <FontAwesomeIcon icon={faSignOut} /> Logout
         </a>
-      </li> */}
-    </>
+      </li>
+    </Fragment>
   );
 
   const guestLinks = (
-    <>
-      {/* <li className="nav-item">
+    <Fragment>
+      <li className="nav-item">
         <Link
           to="/register"
           className="nav-link"
@@ -47,8 +53,8 @@ const AppNavbar = ({ title }) => {
         >
           Login
         </Link>
-      </li> */}
-    </>
+      </li>
+    </Fragment>
   );
 
   return (

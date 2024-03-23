@@ -92,7 +92,8 @@ const AuthState = (props) => {
         register,
         clearErrors,
         loadUser,
-        login
+        login,
+        logout
       }}
     >
       {props.children}

@@ -10,6 +10,7 @@ import NotFound from "./compontents/pages/NotFound";
 import Register from "./compontents/auth/Register";
 import Login from "./compontents/auth/Login";
 import Alerts from "./compontents/layout/Alerts";
+import PrivateRoute from "./compontents/routing/PrivateRoute";
 
 import ContactState from "./context/contact/ContactState";
 import AuthState from "./context/auth/AuthState";
@@ -34,8 +35,17 @@ const App = () => {
                 <Routes>
                   <Route
                     exact
+                    path="/login"
+                    Component={Login}
+                  />
+                  <Route
+                    exact
                     path="/"
-                    Component={Home}
+                    element={
+                      <PrivateRoute>
+                        <Home />
+                      </PrivateRoute>
+                    }
                   />
                   <Route
                     exact
@@ -46,11 +56,6 @@ const App = () => {
                     exact
                     path="/register"
                     Component={Register}
-                  />
-                  <Route
-                    exact
-                    path="/login"
-                    Component={Login}
                   />
                   <Route
                     path="*"
